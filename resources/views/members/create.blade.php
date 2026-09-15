@@ -1,19 +1,9 @@
-{{-- File: resources/views/members/create.blade.php --}}
+@extends('layouts.app')
 
-<!DOCTYPE html>
+@section('title', 'Tambah Daftar Buku')
 
-<html lang="id">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Tambah Member</title>
+@section('style')
     <style>
-        body {
-            font-family: sans-serif;
-            margin: 40px;
-            max-width: 500px;
-        }
-
         label {
             display: block;
             margin-top: 12px;
@@ -49,10 +39,9 @@
             cursor: pointer;
         }
     </style>
+@endsection
 
-</head>
-
-<body>
+@section('content')
     <h1>Tambah Mahasiswa</h1>
 
     <p>
@@ -63,14 +52,12 @@
 
     <form action="{{ route('members.store') }}" method="POST">
         @csrf
-
         <label for="nama">Nama</label>
         <input type="text" name="nama" id="nama" value="{{ old('nama') }}">
 
         @error('nama')
             <div class="error">{{ $message }}</div>
         @enderror
-
 
         <label for="nim">NIM</label>
         <input type="number" name="nim" id="nim" value="{{ old('nim') }}">
@@ -79,14 +66,12 @@
             <div class="error">{{ $message }}</div>
         @enderror
 
-
         <label for="email">Email</label>
         <input type="email" name="email" id="email" value="{{ old('email') }}">
 
         @error('email')
             <div class="error">{{ $message }}</div>
         @enderror
-
 
         <label for="nomor_telepon">Nomor Telepon</label>
         <input type="text" name="nomor_telepon" id="nomor_telepon" value="{{ old('nomor_telepon') }}">
@@ -95,14 +80,12 @@
             <div class="error">{{ $message }}</div>
         @enderror
 
-
         <label for="alamat">Alamat</label>
         <textarea name="alamat" id="alamat">{{ old('alamat') }}</textarea>
 
         @error('alamat')
             <div class="error">{{ $message }}</div>
         @enderror
-
 
         <label for="status">Status</label>
         <select name="status" id="status">
@@ -119,11 +102,7 @@
             <div class="error">{{ $message }}</div>
         @enderror
 
-
         <button type="submit" class="btn">Simpan</button>
 
     </form>
-
-</body>
-
-</html>
+@endsection

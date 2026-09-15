@@ -21,7 +21,6 @@ class StoreMemberRequest extends FormRequest
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
-    // id,nama, nim, email, nomor_telepon, alamat, status
     public function rules(): array
     {
         return [

@@ -1,17 +1,9 @@
-{{-- File: resources/views/categories/create.blade.php --}}
-<!DOCTYPE html>
-<html lang="id">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <title>Tambah Kategori</title>
+@section('title', 'Tambah Daftar Buku')
+
+@section('style')
     <style>
-        body {
-            font-family: sans-serif;
-            margin: 40px;
-            max-width: 500px;
-        }
-
         label {
             display: block;
             margin-top: 12px;
@@ -42,9 +34,9 @@
             cursor: pointer;
         }
     </style>
-</head>
+@endsection
 
-<body>
+@section('content')
     <h1>Tambah Kategori</h1>
     <p><a href="{{ route('categories.index') }}">&larr; Kembali ke daftar kategori</a></p>
 
@@ -65,6 +57,4 @@
 
         <button type="submit" class="btn">Simpan</button>
     </form>
-</body>
-
-</html>
+@endsection

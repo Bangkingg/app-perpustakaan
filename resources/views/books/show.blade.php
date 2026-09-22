@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Daftar Buku')
+@section('title', 'Detail Daftar Buku')
 
 @section('style')
     <style>
@@ -59,7 +59,7 @@
         </tr>
         <tr>
             <th>Kategori</th>
-            <td>{{ $book['kategori'] }}</td>
+            <td><td>{{ $book['category_id'] }}</td></td>
         </tr>
     </table>
 @endsection

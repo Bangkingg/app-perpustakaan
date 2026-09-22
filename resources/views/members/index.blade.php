@@ -3,7 +3,23 @@
 @section('title', 'Daftar Anggota')
 
 @section('content')
-    <h1>Daftar Anggota</h1>
+
+    <div class="header-members">
+        <div>
+            <h1>Daftar Anggota</h1>
+            <a href="{{ route('members.create') }}" class="btn">+ Tambah Anggota</a>
+        </div>
+
+        <form action="{{ route('members.index') }}" method="GET" class="search-form">
+            <input
+                type="text"
+                name="search"
+                placeholder="Cari nama anggota..."
+                value="{{ request('search') }}"
+            >
+            <button type="submit" class="btn">Cari</button>
+        </form>
+    </div>
 
     <table>
         <thead>
@@ -16,6 +32,7 @@
                 <th>Status</th>
             </tr>
         </thead>
+
         <tbody>
             @forelse ($members as $member)
                 <tr>
@@ -34,5 +51,36 @@
         </tbody>
     </table>
 
-    <p><em>Catatan: data di atas masih data dummy (array statis di Controller). Form tambah/edit anggota dan CRUD lengkap anggota baru dibuat mulai Pertemuan 5.</em></p>
+    {{ $members->appends(request()->query())->links() }}
+
 @endsection
+
+<style>
+    .header-members {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .header-members h1 {
+        margin-bottom: 10px;
+    }
+
+    .search-form {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .search-form input {
+        width: 250px;
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .search-form .btn {
+        padding: 8px 15px;
+    }
+</style>

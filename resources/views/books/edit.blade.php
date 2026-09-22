@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Daftar Buku')
+@section('title', 'Ubah Daftar Buku')
 
 @section('style')
     <style>

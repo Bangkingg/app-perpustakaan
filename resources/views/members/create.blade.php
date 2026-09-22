@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Daftar Buku')
+@section('title', 'Tambah Member')
 
 @section('style')
     <style>
@@ -90,11 +90,11 @@
         <label for="status">Status</label>
         <select name="status" id="status">
             <option value="">-- Pilih Status --</option>
-            <option value="Aktif" @selected(old('status') == 'Aktif')>
+            <option value="aktif" @selected(old('status') == 'aktif')>
                 Aktif
             </option>
-            <option value="Tidak Aktif" @selected(old('status') == 'Tidak Aktif')>
-                Tidak Aktif
+            <option value="nonaktif" @selected(old('status') == 'nonaktif')>
+                Nonaktif
             </option>
         </select>
 

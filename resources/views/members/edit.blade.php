@@ -1,14 +1,8 @@
-{{-- File: resources/views/members/edit.blade.php --}}
+@extends('layouts.app')
 
-<!DOCTYPE html>
+@section('title', 'Ubah Daftar Buku')
 
-<html lang="id">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Mahasiswa</title>
-
-    ```
+@section('style')
     <style>
         body {
             font-family: sans-serif;
@@ -51,13 +45,9 @@
             cursor: pointer;
         }
     </style>
-    ```
+@endsection
 
-</head>
-
-<body>
-
-    ```
+@section('content')
     <h1>Edit Mahasiswa</h1>
 
     <p>
@@ -67,42 +57,56 @@
     </p>
 
     <form action="{{ route('members.update', $member['id']) }}" method="POST">
-
         @csrf
         @method('PUT')
 
         <label for="nama">Nama</label>
-        <input type="text" name="nama" id="nama" value="{{ old('nama', $member['nama']) }}">
+        <input
+            type="text"
+            name="nama"
+            id="nama"
+            value="{{ old('nama', $member['nama']) }}"
+        >
 
         @error('nama')
             <div class="error">{{ $message }}</div>
         @enderror
 
-
         <label for="nim">NIM</label>
-        <input type="number" name="nim" id="nim" value="{{ old('nim', $member['nim']) }}">
+        <input
+            type="number"
+            name="nim"
+            id="nim"
+            value="{{ old('nim', $member['nim']) }}"
+        >
 
         @error('nim')
             <div class="error">{{ $message }}</div>
         @enderror
 
-
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" value="{{ old('email', $member['email']) }}">
+        <input
+            type="email"
+            name="email"
+            id="email"
+            value="{{ old('email', $member['email']) }}"
+        >
 
         @error('email')
             <div class="error">{{ $message }}</div>
         @enderror
 
-
         <label for="nomor_telepon">Nomor Telepon</label>
-        <input type="text" name="nomor_telepon" id="nomor_telepon"
-            value="{{ old('nomor_telepon', $member['nomor_telepon']) }}">
+        <input
+            type="text"
+            name="nomor_telepon"
+            id="nomor_telepon"
+            value="{{ old('nomor_telepon', $member['nomor_telepon']) }}"
+        >
 
         @error('nomor_telepon')
             <div class="error">{{ $message }}</div>
         @enderror
-
 
         <label for="alamat">Alamat</label>
         <textarea name="alamat" id="alamat">{{ old('alamat', $member['alamat']) }}</textarea>
@@ -111,32 +115,31 @@
             <div class="error">{{ $message }}</div>
         @enderror
 
-
         <label for="status">Status</label>
         <select name="status" id="status">
-
             <option value="">-- Pilih Status --</option>
 
-            <option value="Aktif" @selected(old('status', $member['status']) == 'Aktif')>
+            <option
+                value="Aktif"
+                @selected(old('status', $member['status']) == 'Aktif')
+            >
                 Aktif
             </option>
 
-            <option value="Tidak Aktif" @selected(old('status', $member['status']) == 'Tidak Aktif')>
+            <option
+                value="Tidak Aktif"
+                @selected(old('status', $member['status']) == 'Tidak Aktif')
+            >
                 Tidak Aktif
             </option>
-
         </select>
 
         @error('status')
             <div class="error">{{ $message }}</div>
         @enderror
 
-
-        <button type="submit" class="btn">Update</button>
-
+        <button type="submit" class="btn">
+            Update
+        </button>
     </form>
-    ```
-
-</body>
-
-</html>
+@endsection

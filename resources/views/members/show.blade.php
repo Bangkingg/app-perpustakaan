@@ -1,89 +1,121 @@
-{{-- File: resources/views/members/show.blade.php --}}
+@extends('layouts.app')
 
-<!DOCTYPE html>
+@section('title', 'Detail Anggota')
 
-<html lang="id">
+@section('style')
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 40px;
+            max-width: 700px;
+        }
 
-<head>
-    <meta charset="UTF-8">
-    <title>Detail Mahasiswa</title>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 16px;
+        }
 
-```
-<style>
-    body {
-        font-family: sans-serif;
-        margin: 40px;
-        max-width: 500px;
-    }
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            text-align: left;
+        }
 
-    table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-top: 16px;
-    }
+        .info th {
+            width: 160px;
+            background: #f3f4f6;
+        }
+    </style>
+@endsection
 
-    th,
-    td {
-        border: 1px solid #ccc;
-        padding: 8px 12px;
-        text-align: left;
-    }
+@section('content')
+    <h1>Detail Anggota</h1>
 
-    th {
-        width: 160px;
-        background: #f3f4f6;
-    }
-</style>
-```
+    <p>
+        <a href="{{ route('members.index') }}">
+            &larr; Kembali ke daftar anggota
+        </a>
+    </p>
 
-</head>
+    <table class="info">
+        <tr>
+            <th>Nama</th>
+            <td>{{ $member['nama'] }}</td>
+        </tr>
 
-<body>
+        <tr>
+            <th>NIM</th>
+            <td>{{ $member['nim'] }}</td>
+        </tr>
 
-```
-<h1>Detail Mahasiswa</h1>
+        <tr>
+            <th>Email</th>
+            <td>{{ $member['email'] }}</td>
+        </tr>
 
-<p>
-    <a href="{{ route('members.index') }}">
-        &larr; Kembali ke daftar mahasiswa
-    </a>
-</p>
+        <tr>
+            <th>Nomor Telepon</th>
+            <td>{{ $member['nomor_telepon'] }}</td>
+        </tr>
 
-<table>
+        <tr>
+            <th>Alamat</th>
+            <td>{{ $member['alamat'] }}</td>
+        </tr>
 
-    <tr>
-        <th>Nama</th>
-        <td>{{ $member['nama'] }}</td>
-    </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ ucfirst($member['status']) }}</td>
+        </tr>
+    </table>
 
-    <tr>
-        <th>NIM</th>
-        <td>{{ $member['nim'] }}</td>
-    </tr>
+    <h2>Riwayat Peminjaman</h2>
 
-    <tr>
-        <th>Email</th>
-        <td>{{ $member['email'] }}</td>
-    </tr>
+    <p>
+        <em>
+            Diambil lewat relasi
+            <code>$member->loans</code>
+            - satu anggota bisa punya banyak transaksi peminjaman.
+        </em>
+    </p>
 
-    <tr>
-        <th>Nomor Telepon</th>
-        <td>{{ $member['nomor_telepon'] }}</td>
-    </tr>
+    <table>
+        <thead>
+            <tr>
+                <th>Tanggal Pinjam</th>
+                <th>Tanggal Kembali</th>
+                <th>Petugas</th>
+                <th>Buku</th>
+                <th>Status</th>
+            </tr>
+        </thead>
 
-    <tr>
-        <th>Alamat</th>
-        <td>{{ $member['alamat'] }}</td>
-    </tr>
+        <tbody>
+            @forelse ($member['loans'] as $loan)
+                <tr>
+                    <td>{{ $loan['tanggal_pinjam'] }}</td>
 
-    <tr>
-        <th>Status</th>
-        <td>{{ $member['status'] }}</td>
-    </tr>
+                    <td>{{ $loan['tanggal_kembali'] }}</td>
 
-</table>
-```
+                    <td>{{ $loan['user']['name'] }}</td>
 
-</body>
+                    <td>
+                        @foreach ($loan['loanItems'] as $item)
+                            {{ $item['book']['judul'] }}@if (!$loop->last), @endif
+                        @endforeach
+                    </td>
 
-</html>
+                    <td>{{ ucfirst($loan['status']) }}</td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="5">
+                        Anggota ini belum pernah meminjam buku.
+                    </td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+@endsection

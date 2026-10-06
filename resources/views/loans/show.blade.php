@@ -70,7 +70,31 @@
 
         <tr>
             <th>Status</th>
-            <td>{{ ucfirst($loan['status']) }}</td>
+            @if ($loan['status'] === 'dikembalikan')
+                <span class="badge-status badge-success">
+                    {{ ucfirst($loan['status']) }}
+                </span>
+            @elseif ($loan['status'] === 'dipinjam')
+                <span class="badge-status badge-warning">
+                    {{ ucfirst($loan['status']) }}
+                </span>
+            @elseif ($loan['status'] === 'terlambat')
+                <span class="badge-status badge-danger">
+                    {{ ucfirst($loan['status']) }}
+                </span>
+                @endif@if ($loan['status'] === 'dikembalikan')
+                    <span class="badge-status badge-success">
+                        {{ ucfirst($loan['status']) }}
+                    </span>
+                @elseif ($loan['status'] === 'dipinjam')
+                    <span class="badge-status badge-warning">
+                        {{ ucfirst($loan['status']) }}
+                    </span>
+                @elseif ($loan['status'] === 'terlambat')
+                    <span class="badge-status badge-danger">
+                        {{ ucfirst($loan['status']) }}
+                    </span>
+                @endif
         </tr>
     </table>
 
